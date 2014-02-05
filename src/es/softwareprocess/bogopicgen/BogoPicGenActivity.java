@@ -57,13 +57,14 @@ import android.widget.Toast;
 import android.view.View.OnClickListener;
 public class BogoPicGenActivity extends Activity {
 
+	private static int dim;
 	Uri imageFileUri;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
+        dim = getWindowManager().getDefaultDisplay().getWidth();
         setBogoPic();
         
         ImageButton button = (ImageButton)findViewById(R.id.TakeAPhoto);
@@ -101,10 +102,12 @@ public class BogoPicGenActivity extends Activity {
    
 
     private Bitmap ourBMP;
+
     private void setBogoPic() {
     	Toast.makeText(this, "Generating Photo", Toast.LENGTH_LONG).show();
 		ImageButton button = (ImageButton)findViewById(R.id.TakeAPhoto);
-		ourBMP = BogoPicGen.generateBitmap(400, 400);
+		ourBMP = BogoPicGen.generateBitmap(dim, dim);
+	
 		button.setImageBitmap(ourBMP);
 	}
     private File getPicturePath(Intent intent) {
